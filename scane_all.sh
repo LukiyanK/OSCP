@@ -23,7 +23,7 @@ while read line;do
 done < $FILE
 while read line;do
     if [ $(cat $Path/$line/nmap_out | grep '445/tcp[[:blank:]]*open' | wc -m) -gt 0 ];then 
-        nmap --script=smb* -p445 $line -o $Path/$line/smb_scane_out &
+        nmap --script=smb* -p445 $line -o $Path/$line/smb_scane_out --min-rate=1000 &
     fi 
 done < $FILE
 while read line;do
