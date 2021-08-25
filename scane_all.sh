@@ -12,7 +12,7 @@ done < $FILE
 while read line;do
     if [ $(cat $Path/$line/nmap_out | grep '80/tcp[[:blank:]]*open' | wc -m) -gt 0 ];then 
         nikto -h $line -o $Path/$line/nikto_80_out -Format txt &
-        dirb http://$line -o $Path/$line/dirb_80_out &
+        dirb http://$line -r -o $Path/$line/dirb_80_out &
     fi 
 done < $FILE
 while read line;do
@@ -27,5 +27,5 @@ done < $FILE
 #    fi 
 #done < $FILE
 while read line;do
-    sshpass -p "$password" sudo nmap nmap -sU --top-ports 1000 $line -oN $Path/$line/nmap_top_udp_out --min-rate=5000
+    sshpass -p "$password" sudo nmap nmap -sU --top-ports 100 $line -oN $Path/$line/nmap_top_udp_out --min-rate=5000
 done < $FILE
