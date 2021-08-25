@@ -21,11 +21,11 @@ while read line;do
         dirb http://$line -r -o $Path/$line/dirb_80_out &
     fi 
 done < $FILE
-while read line;do
-    if [ $(cat $Path/$line/nmap_out | grep '445/tcp[[:blank:]]*open' | wc -m) -gt 0 ];then 
-        nmap --script=smb* -p445 $line -o $Path/$line/smb_scane_out --min-rate=1000 &
-    fi 
-done < $FILE
+#while read line;do
+#    if [ $(cat $Path/$line/nmap_out | grep '445/tcp[[:blank:]]*open' | wc -m) -gt 0 ];then 
+#        nmap --script=smb* -p445 $line -o $Path/$line/smb_scane_out --min-rate=1000 &
+#    fi 
+#done < $FILE
 while read line;do
     sshpass -p "$password" sudo nmap nmap -sU --top-ports 1000 $line -oN $Path/$line/nmap_top_udp_out --min-rate=5000
 done < $FILE
