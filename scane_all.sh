@@ -12,10 +12,6 @@ done < $FILE
 while read line;do
     if [ $(cat $Path/$line/nmap_out | grep "80/tcp open" | wc -m) -gt 0 ];then 
         nikto -h $line -o $Path/$line/nikto_out -Format txt &
-    fi 
-done < $FILE
-while read line;do
-    if [ $(cat $Path/$line/nmap_out | grep "80/tcp open" | wc -m) -gt 0 ];then 
         dirb http://$line -o $Path/$line/dirb_out &
     fi 
 done < $FILE
