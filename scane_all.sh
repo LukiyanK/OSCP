@@ -27,6 +27,5 @@ while read line;do
     fi 
 done < $FILE
 while read line;do
-    mkdir $Path/$line
-    nmap nmap -sU --top-ports 1000 $line -oN $Path/$line/nmap_top_udp_out --min-rate=5000
+    sshpass -p "$password" sudo nmap nmap -sU --top-ports 1000 $line -oN $Path/$line/nmap_top_udp_out --min-rate=5000
 done < $FILE
