@@ -18,7 +18,7 @@ done < $FILE
 while read line;do
     if [ $(cat $Path/$line/nmap_out | grep '443/tcp[[:blank:]]*open' | wc -m) -gt 0 ];then 
         nikto -h $line -o $Path/$line/nikto_80_out -Format txt &
-        dirb http://$line -o $Path/$line/dirb_80_out &
+        dirb -r http://$line -o $Path/$line/dirb_80_out &
     fi 
 done < $FILE
 while read line;do
